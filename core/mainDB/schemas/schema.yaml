@@ -1,0 +1,14 @@
+Username:
+  minLen: "3"
+  maxLen: "16"
+  notContains: " "
+  notHasUpperCase: "true"
+
+Email:
+  minLen:  "5"
+  maxLen:  "100"
+  isEmail: "true"
+
+Password:
+  minLen: "5"
+  maxLen: "100"
