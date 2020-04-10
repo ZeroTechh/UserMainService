@@ -1,0 +1,16 @@
+service:
+  debug: true
+  logFile: "user_service.log"
+
+database:
+  address: "127.0.0.1:27017"
+  db: "UserMainServiceDB"
+  collections: "UserMainData"
+
+messages:
+  usernameExists: "Username Already Exists"
+  emailExists: "Email Already Exists"
+  invalidUsernameOrEmail: "The username or email is invalid"
+  invalidPassword: "Password is invalid"
+  invalidUserData: "User data is invalid"
+  invalidAuthData: "Auth data is invalid"
