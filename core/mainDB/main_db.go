@@ -82,7 +82,7 @@ func (mainDB MainDB) Get(filter types.Main) (data types.Main) {
 }
 
 // Update updates user's mainDB data
-func (mainDB MainDB) Update(filter types.Main, update types.Main) string {
+func (mainDB MainDB) Update(userID string, update types.Main) string {
 	if !isUpdateValid(update) {
 		return messages.Str("invalidUserData")
 	}
@@ -94,7 +94,7 @@ func (mainDB MainDB) Update(filter types.Main, update types.Main) string {
 
 	mainDB.collection.UpdateOne(
 		context.TODO(),
-		filter,
+		types.Main{UserID: userID},
 		map[string]types.Main{"$set": update},
 	)
 	return ""

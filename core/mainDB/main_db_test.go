@@ -38,16 +38,16 @@ func TestMainDB(t *testing.T) {
 	// Testing Update
 	mockData2, _ = utils.GetMockUserData()
 	update := types.Main{Username: mockData2.Username}
-	msg = mainDB.Update(types.Main{UserID: mockData.UserID}, update)
+	msg = mainDB.Update(mockData.UserID, update)
 	assert.Zero(msg)
 
 	// Testing Update returns message for invalid update
 	update = types.Main{UserID: "NN"}
-	msg = mainDB.Update(types.Main{UserID: mockData.UserID}, update)
+	msg = mainDB.Update(mockData.UserID, update)
 	assert.NotZero(msg)
 
 	// Testing Update returns message for existing unique fields
 	update = types.Main{Username: mockData2.Username}
-	msg = mainDB.Update(types.Main{UserID: mockData.UserID}, update)
+	msg = mainDB.Update(mockData.UserID, update)
 	assert.NotZero(msg)
 }
