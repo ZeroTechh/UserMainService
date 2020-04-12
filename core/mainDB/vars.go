@@ -9,7 +9,7 @@ var (
 	// all the configs
 	config = hades.GetConfig(
 		"main.yaml",
-		[]string{"config", "../../config"},
+		[]string{"config", "../config", "../../config"},
 	)
 	dbConfig = config.Map("database")
 	messages = config.Map("messages")

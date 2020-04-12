@@ -1,6 +1,6 @@
 service:
   debug: true
-  logFile: "user_service.log"
+  logFile: "user_main_service.log"
 
 database:
   address: "127.0.0.1:27017"

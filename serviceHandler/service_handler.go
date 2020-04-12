@@ -10,6 +10,17 @@ import (
 	"github.com/ZeroTechh/UserMainService/core/mainDB"
 )
 
+func dataToProto(data types.Main) *proto.Data {
+	request := proto.Data{}
+	copier.Copy(&request, &data)
+	return &request
+}
+
+func protoToData(request *proto.Data) (data types.Main) {
+	copier.Copy(&data, &request)
+	return
+}
+
 // New returns a new service handler
 func New() *Handler {
 	handler := Handler{}
@@ -38,17 +49,17 @@ func (handler Handler) Auth(ctx context.Context, request *proto.AuthRequest) (*p
 
 // Add is used to handle Add function
 func (handler Handler) Add(ctx context.Context, request *proto.Data) (*proto.AddResponse, error) {
-	var data types.Main
-	copier.Copy(&data, &request)
+	data := protoToData(request)
 
 	userID := handler.mainDB.GenerateID()
+	data.UserID = userID
 	msg := handler.mainDB.Create(data)
 
 	return &proto.AddResponse{Message: msg, UserID: userID}, nil
 }
 
 // Get is used to handle Get function
-func (handler Handler) Get(ctx context.Context, request *proto.GetRequest) (response *proto.Data, err error) {
+func (handler Handler) Get(ctx context.Context, request *proto.GetRequest) (*proto.Data, error) {
 	filter := types.Main{
 		UserID:   request.UserID,
 		Username: request.Username,
@@ -56,9 +67,9 @@ func (handler Handler) Get(ctx context.Context, request *proto.GetRequest) (resp
 	}
 
 	data := handler.mainDB.Get(filter)
-	copier.Copy(&response, &data)
+	response := dataToProto(data)
 
-	return
+	return response, nil
 }
 
 // Update is used to handler Update function

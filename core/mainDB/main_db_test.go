@@ -41,6 +41,9 @@ func TestMainDB(t *testing.T) {
 	msg = mainDB.Update(mockData.UserID, update)
 	assert.Zero(msg)
 
+	returnedData = mainDB.Get(types.Main{UserID: mockData.UserID})
+	assert.Equal(mockData2.Username, returnedData.Username)
+
 	// Testing Update returns message for invalid update
 	update = types.Main{UserID: "NN"}
 	msg = mainDB.Update(mockData.UserID, update)
