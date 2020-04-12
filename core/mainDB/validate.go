@@ -9,7 +9,7 @@ import (
 	"go.uber.org/zap"
 )
 
-var schemaPaths = []string{"schemas", "../core/mainDB/schemas"}
+var schemaPaths = []string{"schemas", "../core/mainDB/schemas", "core/mainDB/schemas"}
 
 const schemaFile = "schema.yaml"
 

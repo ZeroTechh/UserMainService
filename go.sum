@@ -14,6 +14,8 @@ github.com/ZeroTechh/VelocityCore v0.0.17 h1:PNrtA7VlID5me2/ajmU7X1GFqTnHu9X1o/G
 github.com/ZeroTechh/VelocityCore v0.0.17/go.mod h1:2D5bnrxlafVR9RuFoKdulX+SUX8Z1yx3Q7hGdUWslFY=
 github.com/ZeroTechh/VelocityCore v0.0.18 h1:KQfGthimwYCuUHLrK0W5JibYuUFW3oo/jktHrObN4+0=
 github.com/ZeroTechh/VelocityCore v0.0.18/go.mod h1:2D5bnrxlafVR9RuFoKdulX+SUX8Z1yx3Q7hGdUWslFY=
+github.com/ZeroTechh/VelocityCore v0.0.19 h1:vvBuLM/tk78zCuDlG/F7z/AXozAntFd+tPSIG4jMk1c=
+github.com/ZeroTechh/VelocityCore v0.0.19/go.mod h1:2D5bnrxlafVR9RuFoKdulX+SUX8Z1yx3Q7hGdUWslFY=
 github.com/ZeroTechh/blaze v0.1.5 h1:9mpyMJOxrVzGf2PySrjwMXy20VRolBX3Hmy6VuUbRus=
 github.com/ZeroTechh/blaze v0.1.5/go.mod h1:VlFs7I4ULXTM3OfX+E8yvfuDecaNORKPa08xR1Oq8x8=
 github.com/ZeroTechh/blaze v0.1.6 h1:3ob6f8RTSP5Wd8KsBjJMlLeQMMihwbpRTatLzSvCl3Y=
