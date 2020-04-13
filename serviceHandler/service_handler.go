@@ -3,11 +3,11 @@ package serviceHandler
 import (
 	"context"
 
-	"github.com/ZeroTechh/UserService/core/types"
 	proto "github.com/ZeroTechh/VelocityCore/proto/UserMainService"
 	"github.com/jinzhu/copier"
 
 	"github.com/ZeroTechh/UserMainService/core/mainDB"
+	"github.com/ZeroTechh/UserMainService/core/types"
 )
 
 func dataToProto(data types.Main) *proto.Data {

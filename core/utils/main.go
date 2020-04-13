@@ -4,7 +4,7 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/ZeroTechh/UserService/core/types"
+	"github.com/ZeroTechh/UserMainService/core/types"
 )
 
 // generateRandStr generates a random string

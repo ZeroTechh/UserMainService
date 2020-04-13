@@ -3,10 +3,11 @@ package mainDB
 import (
 	"context"
 
-	"github.com/ZeroTechh/UserService/core/types"
 	"github.com/ZeroTechh/VelocityCore/utils"
 	"github.com/google/uuid"
 	"go.mongodb.org/mongo-driver/mongo"
+
+	"github.com/ZeroTechh/UserMainService/core/types"
 )
 
 // New returns a new mainDB handler struct

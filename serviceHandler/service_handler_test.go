@@ -4,10 +4,10 @@ import (
 	"context"
 	"testing"
 
-	"github.com/ZeroTechh/UserService/core/types"
 	proto "github.com/ZeroTechh/VelocityCore/proto/UserMainService"
 	"github.com/stretchr/testify/assert"
 
+	"github.com/ZeroTechh/UserMainService/core/types"
 	"github.com/ZeroTechh/UserMainService/core/utils"
 )
 

@@ -3,9 +3,9 @@ package mainDB
 import (
 	"testing"
 
-	"github.com/ZeroTechh/UserService/core/types"
 	"github.com/stretchr/testify/assert"
 
+	"github.com/ZeroTechh/UserMainService/core/types"
 	"github.com/ZeroTechh/UserMainService/core/utils"
 )
 
