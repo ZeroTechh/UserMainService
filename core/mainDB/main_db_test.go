@@ -6,7 +6,7 @@ import (
 	"github.com/ZeroTechh/UserService/core/types"
 	"github.com/stretchr/testify/assert"
 
-	"github.com/ZeroTechh/UserService/core/utils"
+	"github.com/ZeroTechh/UserMainService/core/utils"
 )
 
 func TestMainDB(t *testing.T) {
@@ -14,7 +14,7 @@ func TestMainDB(t *testing.T) {
 	mainDB := New()
 
 	// Testing Create function
-	mockData, _ := utils.GetMockUserData()
+	mockData := utils.MockData()
 	mockData.UserID = mainDB.GenerateID() // Tested GenerateID
 	msg := mainDB.Create(mockData)
 	assert.Zero(msg)
@@ -23,11 +23,11 @@ func TestMainDB(t *testing.T) {
 	assert.NotZero(mainDB.Create(types.Main{}))
 
 	// Testing that create returns messages for already existing email and username
-	mockData2, _ := utils.GetMockUserData()
+	mockData2 := utils.MockData()
 	mockData2.Username = mockData.Username
 	assert.NotZero(mainDB.Create(mockData2))
 
-	mockData2, _ = utils.GetMockUserData()
+	mockData2 = utils.MockData()
 	mockData2.Email = mockData.Email
 	assert.NotZero(mainDB.Create(mockData2))
 
@@ -36,7 +36,7 @@ func TestMainDB(t *testing.T) {
 	assert.Equal(mockData, returnedData)
 
 	// Testing Update
-	mockData2, _ = utils.GetMockUserData()
+	mockData2 = utils.MockData()
 	update := types.Main{Username: mockData2.Username}
 	msg = mainDB.Update(mockData.UserID, update)
 	assert.Zero(msg)
