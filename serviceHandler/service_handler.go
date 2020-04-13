@@ -74,10 +74,7 @@ func (handler Handler) Get(ctx context.Context, request *proto.GetRequest) (*pro
 
 // Update is used to handler Update function
 func (handler Handler) Update(ctx context.Context, request *proto.UpdateRequest) (*proto.UpdateResponse, error) {
-	var update types.Main
-	copier.Copy(&update, &request.Update)
-
+	update := protoToData(request.Update)
 	msg := handler.mainDB.Update(request.UserID, update)
-
 	return &proto.UpdateResponse{Message: msg}, nil
 }
