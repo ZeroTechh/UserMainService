@@ -11,7 +11,7 @@ import (
 	"github.com/ZeroTechh/UserMainService/core/utils"
 )
 
-func TestMainDB(t *testing.T) {
+func TestServiceHandler(t *testing.T) {
 	assert := assert.New(t)
 	handler := New()
 	ctx := context.TODO()
