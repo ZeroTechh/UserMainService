@@ -44,7 +44,7 @@ func (handler Handler) Auth(ctx context.Context, request *proto.AuthRequest) (*p
 	data := handler.mainDB.Get(filter)
 	valid := data.Password == request.Password && data != types.Main{}
 	// TODO Add hashing
-	return &proto.AuthResponse{Valid: valid}, nil
+	return &proto.AuthResponse{Valid: valid, UserID: data.UserID}, nil
 }
 
 // Add is used to handle Add function
