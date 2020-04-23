@@ -47,4 +47,9 @@ func TestServiceHandler(t *testing.T) {
 	updateResponse, err := handler.Update(ctx, &updateRequest)
 	assert.NoError(err)
 	assert.Zero(updateResponse.Message)
+
+	// Testing Validate
+	mockData = utils.MockData()
+	valid, err := handler.Validate(ctx, dataToProto(mockData))
+	assert.True(valid.Valid)
 }

@@ -3,7 +3,7 @@ module github.com/ZeroTechh/UserMainService
 go 1.14
 
 require (
-	github.com/ZeroTechh/VelocityCore v0.0.24
+	github.com/ZeroTechh/VelocityCore v0.0.26
 	github.com/ZeroTechh/blaze v0.1.6
 	github.com/ZeroTechh/hades v0.1.9
 	github.com/ZeroTechh/sentinal/v2 v2.0.10

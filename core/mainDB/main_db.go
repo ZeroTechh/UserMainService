@@ -63,7 +63,7 @@ func (mainDB MainDB) GenerateID() string {
 
 // Create is used to add new mainDB data
 func (mainDB MainDB) Create(data types.Main) string {
-	if !isDataValid(data) {
+	if !IsDataValid(data) {
 		return messages.Str("invalidUserData")
 	}
 
@@ -84,7 +84,7 @@ func (mainDB MainDB) Get(filter types.Main) (data types.Main) {
 
 // Update updates user's mainDB data
 func (mainDB MainDB) Update(userID string, update types.Main) string {
-	if !isUpdateValid(update) {
+	if !IsUpdateValid(update) {
 		return messages.Str("invalidUserData")
 	}
 
