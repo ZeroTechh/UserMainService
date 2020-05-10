@@ -5,6 +5,7 @@ import (
 
 	"github.com/ZeroTechh/VelocityCore/utils"
 	"github.com/google/uuid"
+	"github.com/pkg/errors"
 	"go.mongodb.org/mongo-driver/mongo"
 
 	"github.com/ZeroTechh/UserMainService/core/types"
@@ -17,29 +18,28 @@ func New() *MainDB {
 	return &mainDB
 }
 
-// MainDB is used to handle user mainDB data
+// MainDB handles user main data
 type MainDB struct {
-	client     *mongo.Client
-	database   *mongo.Database
-	collection *mongo.Collection
+	coll *mongo.Collection
 }
 
 // init initializes client and database
-func (mainDB *MainDB) init() {
-	mainDB.client = utils.CreateMongoDB(dbConfig.Str("address"), log)
-	mainDB.database = mainDB.client.Database(dbConfig.Str("db"))
-	mainDB.collection = mainDB.database.Collection(dbConfig.Str("collection"))
+func (m *MainDB) init() {
+	c := utils.CreateMongoDB(dbConfig.Str("address"), log)
+	db := c.Database(dbConfig.Str("db"))
+	m.coll = db.Collection(dbConfig.Str("collection"))
 }
 
 // exists checks if user with certain field exists
-func (mainDB MainDB) exists(filter types.Main) bool {
-	return mainDB.Get(filter) != types.Main{}
+func (m MainDB) exists(ctx context.Context, filter types.Main) bool {
+	data, _ := m.Get(ctx, filter)
+	return data != types.Main{}
 }
 
 // uniqueFieldsExists checks if unique fields such as username exist
-func (mainDB MainDB) uniqueFieldsExists(data types.Main) string {
-	usernameExists := mainDB.exists(types.Main{Username: data.Username})
-	emailExists := mainDB.exists(types.Main{Email: data.Email})
+func (m MainDB) uniqueFieldsExists(ctx context.Context, data types.Main) string {
+	usernameExists := m.exists(ctx, types.Main{Username: data.Username})
+	emailExists := m.exists(ctx, types.Main{Email: data.Email})
 	if usernameExists && data.Username != "" {
 		return messages.Str("usernameExists")
 	} else if emailExists && data.Email != "" {
@@ -48,55 +48,56 @@ func (mainDB MainDB) uniqueFieldsExists(data types.Main) string {
 	return ""
 }
 
-// GenerateID is used to generate an user id
-func (mainDB MainDB) GenerateID() string {
-	userIDExists := true
+// ID generates an user id
+func (m MainDB) ID(ctx context.Context) string {
+	exists := true
 	var userID uuid.UUID
-
-	for userIDExists {
+	for exists {
 		userID, _ = uuid.NewRandom()
-		userIDExists = mainDB.exists(types.Main{UserID: userID.String()})
+		exists = m.exists(ctx, types.Main{UserID: userID.String()})
 	}
-
 	return userID.String()
 }
 
-// Create is used to add new mainDB data
-func (mainDB MainDB) Create(data types.Main) string {
-	if !IsDataValid(data) {
-		return messages.Str("invalidUserData")
+// Create adds new user main data
+func (m MainDB) Create(ctx context.Context, data types.Main) (string, error) {
+	if !Valid(data) {
+		return messages.Str("invalidUserData"), nil
 	}
 
-	msg := mainDB.uniqueFieldsExists(data)
+	msg := m.uniqueFieldsExists(ctx, data)
 	if msg != "" {
-		return msg
+		return msg, nil
 	}
 
-	mainDB.collection.InsertOne(context.TODO(), data)
-	return ""
+	_, err := m.coll.InsertOne(ctx, data)
+	return "", errors.Wrap(err, "Error while inserting into db")
 }
 
-// Get is used to a users data
-func (mainDB MainDB) Get(filter types.Main) (data types.Main) {
-	mainDB.collection.FindOne(context.TODO(), filter).Decode(&data)
+// Get returns user main data
+func (m MainDB) Get(
+	ctx context.Context, filter types.Main) (data types.Main, err error) {
+	err = m.coll.FindOne(ctx, filter).Decode(&data)
+	err = errors.Wrap(err, "Error while finding from db")
 	return
 }
 
 // Update updates user's mainDB data
-func (mainDB MainDB) Update(userID string, update types.Main) string {
-	if !IsUpdateValid(update) {
-		return messages.Str("invalidUserData")
+func (m MainDB) Update(
+	ctx context.Context, userID string, update types.Main) (string, error) {
+	if !updateValid(update) {
+		return messages.Str("invalidUserData"), nil
 	}
 
-	msg := mainDB.uniqueFieldsExists(update)
+	msg := m.uniqueFieldsExists(ctx, update)
 	if msg != "" {
-		return msg
+		return msg, nil
 	}
 
-	mainDB.collection.UpdateOne(
-		context.TODO(),
+	_, err := m.coll.UpdateOne(
+		ctx,
 		types.Main{UserID: userID},
 		map[string]types.Main{"$set": update},
 	)
-	return ""
+	return "", errors.Wrap(err, "Error while updating in db")
 }

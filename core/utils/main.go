@@ -7,8 +7,7 @@ import (
 	"github.com/ZeroTechh/UserMainService/core/types"
 )
 
-// generateRandStr generates a random string
-func generateRandStr(length int) string {
+func randStr(length int) string {
 	charset := "1234567890abcdefghijklmnopqrstuvwxyz"
 	seededRand := rand.New(
 		rand.NewSource(time.Now().UnixNano()))
@@ -19,9 +18,9 @@ func generateRandStr(length int) string {
 	return string(b)
 }
 
-// MockData returns mock user main data for testing
-func MockData() types.Main {
-	randomStr := generateRandStr(10)
+// Mock returns mock user main data for testing
+func Mock() types.Main {
+	randomStr := randStr(10)
 	mockUserData := types.Main{
 		Username: randomStr,
 		Password: randomStr,

@@ -1,4 +1,4 @@
-package serviceHandler
+package handler
 
 import (
 	"context"
@@ -13,43 +13,44 @@ import (
 
 func TestServiceHandler(t *testing.T) {
 	assert := assert.New(t)
-	handler := New()
+	h := New()
 	ctx := context.TODO()
 
 	// Testing Add function
-	mockData := utils.MockData()
-	addResponse, err := handler.Add(ctx, dataToProto(mockData))
+	data := utils.Mock()
+	addResponse, err := h.Add(ctx, toProto(data))
 	assert.NotZero(addResponse.UserID)
 	assert.Zero(addResponse.Message)
 	assert.NoError(err)
-	mockData.UserID = addResponse.UserID
+	data.UserID = addResponse.UserID
 
 	// Testing Auth
-	authResponse, err := handler.Auth(ctx, &proto.AuthRequest{
-		Username: mockData.Username,
-		Password: mockData.Password,
+	authResponse, err := h.Auth(ctx, &proto.AuthRequest{
+		Username: data.Username,
+		Password: data.Password,
 	})
 	assert.NoError(err)
 	assert.True(authResponse.Valid)
 
 	// Testing Get
-	getResponse, err := handler.Get(
-		ctx, &proto.GetRequest{UserID: mockData.UserID})
-	assert.Equal(mockData, protoToData(getResponse))
+	getResponse, err := h.Get(
+		ctx, &proto.GetRequest{UserID: data.UserID})
+	assert.Equal(data, toData(getResponse))
 	assert.NoError(err)
 
 	// Testing Update
-	mockData2 := utils.MockData()
-	update := types.Main{Username: mockData2.Username}
+	data2 := utils.Mock()
+	update := types.Main{Username: data2.Username}
 	updateRequest := proto.UpdateRequest{
-		UserID: mockData.UserID, Update: dataToProto(update),
+		UserID: data.UserID, Update: toProto(update),
 	}
-	updateResponse, err := handler.Update(ctx, &updateRequest)
+	updateResponse, err := h.Update(ctx, &updateRequest)
 	assert.NoError(err)
 	assert.Zero(updateResponse.Message)
 
 	// Testing Validate
-	mockData = utils.MockData()
-	valid, err := handler.Validate(ctx, dataToProto(mockData))
+	data = utils.Mock()
+	valid, err := h.Validate(ctx, toProto(data))
 	assert.True(valid.Valid)
+	assert.NoError(err)
 }

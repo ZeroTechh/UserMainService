@@ -13,32 +13,22 @@ var schemaPaths = []string{"schemas", "../core/mainDB/schemas", "core/mainDB/sch
 
 const schemaFile = "schema.yaml"
 
-// IsDataValid checks if data is valid
-func IsDataValid(data interface{}) bool {
-	funcLog := blaze.NewFuncLog(
-		"isDataValid",
-		log,
-		zap.Any("Data", data),
-	)
+// Valid checks if data is valid
+func Valid(data interface{}) bool {
+	funcLog := blaze.NewFuncLog("Valid", log, zap.Any("Data", data))
 	funcLog.Started()
-
 	valid, msg, _ := sentinal.ValidateWithYAML(
 		data,
 		schemaFile,
 		schemaPaths,
 	)
-
 	funcLog.Completed(zap.Any("Message", msg))
 	return valid
 }
 
-// IsUpdateValid checks if the update is valid
-func IsUpdateValid(update interface{}) bool {
-	funcLog := blaze.NewFuncLog(
-		"isUpdateValid",
-		log,
-		zap.Any("Update", update),
-	)
+// updateValid checks if the update is valid
+func updateValid(update interface{}) bool {
+	funcLog := blaze.NewFuncLog("updateValid", log, zap.Any("Update", update))
 	funcLog.Started()
 
 	valid, msg, _ := sentinal.ValidateFieldsWithYAML(

@@ -1,14 +1,8 @@
 cloud.google.com/go v0.26.0/go.mod h1:aQUYkXzVsufM+DwF1aE+0xfcU+56JwCaLick0ClmMTw=
 github.com/BurntSushi/toml v0.3.1 h1:WXkYYl6Yr3qBf1K79EBnL4mak0OimBfB0XUf9Vl28OQ=
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
-github.com/ZeroTechh/VelocityCore v0.0.19 h1:vvBuLM/tk78zCuDlG/F7z/AXozAntFd+tPSIG4jMk1c=
-github.com/ZeroTechh/VelocityCore v0.0.19/go.mod h1:2D5bnrxlafVR9RuFoKdulX+SUX8Z1yx3Q7hGdUWslFY=
-github.com/ZeroTechh/VelocityCore v0.0.24 h1:J52Gsjp+Xqjy7VlGkOT6YA5cy6MxhcFPTIfLOPA5kDc=
-github.com/ZeroTechh/VelocityCore v0.0.24/go.mod h1:2D5bnrxlafVR9RuFoKdulX+SUX8Z1yx3Q7hGdUWslFY=
-github.com/ZeroTechh/VelocityCore v0.0.25 h1:XNkX7mJz+1Q+9LVMrzTiEEk9gkDXShPHpaDazVmST30=
-github.com/ZeroTechh/VelocityCore v0.0.25/go.mod h1:2D5bnrxlafVR9RuFoKdulX+SUX8Z1yx3Q7hGdUWslFY=
-github.com/ZeroTechh/VelocityCore v0.0.26 h1:+SmeLLPzB/m+QSEKSAw2XZkI/5PgCpcviblnwhWc2zM=
-github.com/ZeroTechh/VelocityCore v0.0.26/go.mod h1:2D5bnrxlafVR9RuFoKdulX+SUX8Z1yx3Q7hGdUWslFY=
+github.com/ZeroTechh/VelocityCore v0.0.36 h1:y4LDXsPXJrFKtqG1s1PsQfZFikfHog5i2ijB/+r4r4Q=
+github.com/ZeroTechh/VelocityCore v0.0.36/go.mod h1:2D5bnrxlafVR9RuFoKdulX+SUX8Z1yx3Q7hGdUWslFY=
 github.com/ZeroTechh/blaze v0.1.5 h1:9mpyMJOxrVzGf2PySrjwMXy20VRolBX3Hmy6VuUbRus=
 github.com/ZeroTechh/blaze v0.1.5/go.mod h1:VlFs7I4ULXTM3OfX+E8yvfuDecaNORKPa08xR1Oq8x8=
 github.com/ZeroTechh/blaze v0.1.6 h1:3ob6f8RTSP5Wd8KsBjJMlLeQMMihwbpRTatLzSvCl3Y=
