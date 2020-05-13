@@ -22,7 +22,7 @@ var (
 func main() {
 	defer utils.HandlePanic(log)
 	grpcServer, listner := utils.CreateGRPCServer(
-		services.UserMetaService,
+		services.UserMainService,
 		log,
 	)
 	proto.RegisterUserMainServer(grpcServer, handler.New())
