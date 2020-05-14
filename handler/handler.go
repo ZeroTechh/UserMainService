@@ -42,11 +42,10 @@ func (h *Handler) init() {
 // Auth is used to handle Auth function
 func (h Handler) Auth(ctx context.Context, request *proto.AuthRequest) (*proto.AuthResponse, error) {
 	filter := types.Main{Username: request.Username, Email: request.Email}
-	data, err := h.main.Get(ctx, filter)
-	err = errors.Wrap(err, "Error while getting user main data")
-	valid := data.Password == request.Password && data != types.Main{}
+	data, _ := h.main.Get(ctx, filter)
+	valid := (data.Password == request.Password && data != types.Main{})
 	// TODO Add hashing
-	return &proto.AuthResponse{Valid: valid, UserID: data.UserID}, err
+	return &proto.AuthResponse{Valid: valid, UserID: data.UserID}, nil
 }
 
 // Add is used to handle Add function
